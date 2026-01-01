@@ -344,7 +344,7 @@ export default function NetworkConnectionStep({
         <Button
           variant="outline"
           onClick={onBack}
-          className="w-full sm:min-w-[120px] order-2 sm:order-1"
+          className="w-full sm:w-auto order-2 sm:order-1"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Previous
@@ -435,7 +435,7 @@ export default function NetworkConnectionStep({
             }
           }}
           disabled={rpcHealth !== "healthy" || isInitializing}
-          className="w-full sm:min-w-[120px] order-1 sm:order-2"
+          className="w-full sm:w-auto order-1 sm:order-2"
         >
           {isInitializing ? (
             <>

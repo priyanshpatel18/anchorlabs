@@ -17,11 +17,16 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
+  DialogFooter,
 } from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import { useAutoReinitialize } from "@/hooks/useAutoReinitialize";
 import useProgramStore from "@/stores/programStore";
 import { useAnchorWallet } from "@solana/wallet-adapter-react";
 import { formatDistanceToNow } from "date-fns";
+import { toast } from "sonner";
 import {
   ArrowRight,
   Check,
@@ -33,7 +38,9 @@ import {
   ServerIcon,
   FlaskConical,
   Settings,
-  AlertTriangle
+  AlertTriangle,
+  MessageSquare,
+  Send
 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -47,6 +54,10 @@ export default function Dashboard() {
   const [showIdlDialog, setShowIdlDialog] = useState(false);
   const [idlCopied, setIdlCopied] = useState(false);
   const [showReconfigureDialog, setShowReconfigureDialog] = useState(false);
+  const [showFeedbackDialog, setShowFeedbackDialog] = useState(false);
+  const [feedback, setFeedback] = useState("");
+  const [feedbackType, setFeedbackType] = useState<"bug" | "feature" | "general">("general");
+  const [isSubmittingFeedback, setIsSubmittingFeedback] = useState(false);
   const { programDetails, reset } = useProgramStore();
   const wallet = useAnchorWallet();
   const router = useRouter();
@@ -69,6 +80,67 @@ export default function Dashboard() {
     reset();
     setShowReconfigureDialog(false);
     router.push("/?setup=true");
+  };
+
+  const handleSubmitFeedback = async () => {
+    if (!feedback.trim()) {
+      return;
+    }
+
+    setIsSubmittingFeedback(true);
+    
+    try {
+      const response = await fetch("/api/feedback", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          feedback: feedback.trim(),
+          feedbackType,
+          programName: programDetails?.name,
+          programId: programDetails?.programId,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // If email service is not configured, fall back to mailto
+        if (data.fallback) {
+          const subject = encodeURIComponent(
+            `[AnchorLabs Feedback] ${feedbackType.toUpperCase()}: ${programDetails?.name || "General"}`
+          );
+          const body = encodeURIComponent(
+            `Feedback Type: ${feedbackType}\n\nFeedback:\n${feedback}\n\nProgram: ${programDetails?.name || "N/A"}\nProgram ID: ${programDetails?.programId || "N/A"}`
+          );
+          window.location.href = `mailto:feedback@solixdb.xyz?subject=${subject}&body=${body}`;
+          
+          toast.success("Opening email client", {
+            description: "Please send the email to submit your feedback.",
+          });
+        } else {
+          throw new Error(data.error || "Failed to send feedback");
+        }
+      } else {
+        // Success
+        toast.success("Feedback sent!", {
+          description: "Thank you for your feedback. We'll get back to you soon.",
+        });
+      }
+
+      // Reset form
+      setFeedback("");
+      setFeedbackType("general");
+      setShowFeedbackDialog(false);
+    } catch (error) {
+      console.error("Error submitting feedback:", error);
+      toast.error("Failed to send feedback", {
+        description: error instanceof Error ? error.message : "Please try again later.",
+      });
+    } finally {
+      setIsSubmittingFeedback(false);
+    }
   };
 
   if (!programDetails) {
@@ -129,7 +201,17 @@ export default function Dashboard() {
           initial={{ opacity: 0, x: 10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
+          className="flex items-center gap-2 sm:gap-3"
         >
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setShowFeedbackDialog(true)}
+            className="gap-2"
+          >
+            <MessageSquare className="h-4 w-4" />
+            <span className="hidden sm:inline">Feedback</span>
+          </Button>
           <Button
             variant="outline"
             size="sm"
@@ -137,7 +219,7 @@ export default function Dashboard() {
             className="gap-2 text-destructive hover:text-destructive hover:bg-destructive/10 border-destructive/20"
           >
             <Settings className="h-4 w-4" />
-            Reconfigure
+            <span className="hidden sm:inline">Reconfigure</span>
           </Button>
         </motion.div>
       </motion.div>
@@ -193,6 +275,81 @@ export default function Dashboard() {
               {idlJson}
             </pre>
           </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Feedback Dialog */}
+      <Dialog open={showFeedbackDialog} onOpenChange={setShowFeedbackDialog}>
+        <DialogContent className="sm:max-w-[500px]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <MessageSquare className="h-5 w-5 text-primary" />
+              Share Your Feedback
+            </DialogTitle>
+            <DialogDescription>
+              Help us improve AnchorLabs by sharing your thoughts, reporting bugs, or suggesting features.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="feedback-type">Feedback Type</Label>
+              <select
+                id="feedback-type"
+                value={feedbackType}
+                onChange={(e) => setFeedbackType(e.target.value as "bug" | "feature" | "general")}
+                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <option value="general">General Feedback</option>
+                <option value="bug">Bug Report</option>
+                <option value="feature">Feature Request</option>
+              </select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="feedback-message">Your Feedback</Label>
+              <Textarea
+                id="feedback-message"
+                placeholder="Tell us what you think, what you'd like to see, or any issues you've encountered..."
+                value={feedback}
+                onChange={(e) => setFeedback(e.target.value)}
+                className="min-h-[120px] resize-none"
+                rows={5}
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button
+              variant="outline"
+              onClick={() => {
+                setShowFeedbackDialog(false);
+                setFeedback("");
+                setFeedbackType("general");
+              }}
+              disabled={isSubmittingFeedback}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleSubmitFeedback}
+              disabled={!feedback.trim() || isSubmittingFeedback}
+              className="gap-2"
+            >
+              {isSubmittingFeedback ? (
+                <>
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    className="h-4 w-4 border-2 border-current border-t-transparent rounded-full"
+                  />
+                  Submitting...
+                </>
+              ) : (
+                <>
+                  <Send className="h-4 w-4" />
+                  Submit Feedback
+                </>
+              )}
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
 
