@@ -18,7 +18,9 @@ export async function POST(request: NextRequest) {
 
     // Get email configuration from environment variables
     const recipientEmail = process.env.FEEDBACK_EMAIL || process.env.EMAIL_RECIPIENT;
-    const senderEmail = process.env.EMAIL_SENDER || "AnchorLabs <onboarding@resend.dev>";
+    // Use verified domain email - you can use any address from your verified domain
+    // Common options: feedback@, noreply@, hello@, contact@, etc.
+    const senderEmail = process.env.EMAIL_SENDER || "AnchorLabs <noreply@anchorlabs.solixdb.xyz>";
     
     if (!recipientEmail) {
       console.error("FEEDBACK_EMAIL or EMAIL_RECIPIENT environment variable is not set");
@@ -52,8 +54,15 @@ export async function POST(request: NextRequest) {
 
     if (error) {
       console.error("Resend error:", error);
+      
+      // Provide helpful error message for domain verification issues
+      let errorMessage = error.message || "Failed to send email";
+      if (error.message?.includes("testing emails") || error.message?.includes("verify a domain")) {
+        errorMessage = `Resend domain restriction: ${error.message}. For testing, use your verified email (solixdb.xyz@gmail.com). For production, verify a domain at resend.com/domains and update EMAIL_SENDER.`;
+      }
+      
       return NextResponse.json(
-        { error: error.message || "Failed to send email" },
+        { error: errorMessage },
         { status: 500 }
       );
     }

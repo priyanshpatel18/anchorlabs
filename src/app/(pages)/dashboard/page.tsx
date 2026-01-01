@@ -120,7 +120,9 @@ export default function Dashboard() {
             description: "Please send the email to submit your feedback.",
           });
         } else {
-          throw new Error(data.error || "Failed to send feedback");
+          // Show the error message from the API
+          const errorMessage = data.error || "Failed to send feedback";
+          throw new Error(errorMessage);
         }
       } else {
         // Success
