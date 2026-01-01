@@ -7,12 +7,12 @@ interface EmailTemplateProps {
   programId?: string;
 }
 
-export const EmailTemplate: React.FC<EmailTemplateProps> = ({
+export function EmailTemplate({
   feedbackType,
   feedback,
   programName,
   programId,
-}) => {
+}: EmailTemplateProps): React.JSX.Element {
   return (
     <div style={{ fontFamily: "Arial, sans-serif", maxWidth: "600px", margin: "0 auto" }}>
       <h2 style={{ color: "#333", borderBottom: "2px solid #0070f3", paddingBottom: "10px" }}>
@@ -49,5 +49,5 @@ export const EmailTemplate: React.FC<EmailTemplateProps> = ({
       </p>
     </div>
   );
-};
+}
 
