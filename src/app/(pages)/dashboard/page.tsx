@@ -80,7 +80,7 @@ export default function Dashboard() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="w-full h-full p-6 lg:p-8 overflow-auto bg-gradient-to-b from-background via-background to-muted/20"
+      className="w-full h-full p-4 sm:p-6 lg:p-8 overflow-auto bg-gradient-to-b from-background via-background to-muted/20"
     >
       <motion.div
         initial={{ opacity: 0, y: -10 }}
@@ -103,7 +103,7 @@ export default function Dashboard() {
             <Code className="h-8 w-8 text-primary" />
           </motion.div>
           <div>
-            <h1 className={`${syne} text-3xl lg:text-4xl font-bold mb-2`}>
+            <h1 className={`${syne} text-2xl sm:text-3xl lg:text-4xl font-bold mb-2`}>
               {programDetails.name}
             </h1>
             <div className="flex items-center gap-3 flex-wrap">

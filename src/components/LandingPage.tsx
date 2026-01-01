@@ -83,7 +83,7 @@ export default function LandingPage() {
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
         
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-32 relative">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -117,7 +117,7 @@ export default function LandingPage() {
               transition={{ delay: 0.2, type: "spring", stiffness: 150, damping: 20 }}
               className="space-y-4"
             >
-              <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="flex items-center justify-center gap-2 sm:gap-3 mb-4 sm:mb-6">
                 <motion.div
                   animate={{ 
                     rotate: [0, 5, -5, 0],
@@ -128,11 +128,11 @@ export default function LandingPage() {
                     repeat: Infinity,
                     repeatDelay: 2
                   }}
-                  className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-primary/10 border-2 border-primary/20"
+                  className="flex items-center justify-center w-12 h-12 xs:w-14 xs:h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl sm:rounded-2xl bg-primary/10 border-2 border-primary/20"
                 >
-                  <Code2 className="h-8 w-8 sm:h-10 sm:w-10 text-primary" />
+                  <Code2 className="h-6 w-6 xs:h-7 xs:w-7 sm:h-8 sm:w-8 md:h-10 md:w-10 text-primary" />
                 </motion.div>
-                <h1 className={`${syne} text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent`}>
+                <h1 className={`${syne} text-4xl xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tight bg-gradient-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent`}>
                   AnchorLabs
                 </h1>
               </div>

@@ -161,7 +161,7 @@ export default function TransactionsPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
-      className="w-full h-full p-6 lg:p-8 overflow-auto bg-gradient-to-b from-background via-background to-muted/20"
+      className="w-full h-full p-4 sm:p-6 lg:p-8 overflow-auto bg-gradient-to-b from-background via-background to-muted/20"
     >
       <div className="space-y-6 lg:space-y-8">
         {/* Header */}
@@ -185,10 +185,10 @@ export default function TransactionsPage() {
             <BitcoinIcon className="h-7 w-7 text-primary" />
           </motion.div>
           <div>
-            <h1 className={`${syne} text-3xl lg:text-4xl font-bold mb-2`}>
+            <h1 className={`${syne} text-2xl sm:text-3xl lg:text-4xl font-bold mb-2`}>
               Transactions
             </h1>
-            <p className="text-base text-muted-foreground">
+            <p className="text-sm sm:text-base text-muted-foreground">
               View and search through transaction history for this program
             </p>
           </div>

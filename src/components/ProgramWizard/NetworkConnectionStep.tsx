@@ -166,12 +166,12 @@ export default function NetworkConnectionStep({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.1 }}
-        className="mb-6"
+        className="mb-4 sm:mb-6"
       >
-        <h2 className="text-2xl font-semibold tracking-tight">
+        <h2 className="text-xl sm:text-2xl font-semibold tracking-tight">
           Network Connection Setup
         </h2>
-        <p className="text-muted-foreground">
+        <p className="text-sm sm:text-base text-muted-foreground">
           Configure RPC endpoint for your program
         </p>
       </motion.div>
@@ -189,16 +189,16 @@ export default function NetworkConnectionStep({
           transition={{ delay: 0.25 }}
           className="overflow-hidden rounded-lg border bg-card/50 shadow-sm"
         >
-          <div className="border-b bg-muted/30 px-6 py-4">
+          <div className="border-b bg-muted/30 px-4 sm:px-6 py-3 sm:py-4">
             <div className="flex items-center gap-2">
-              <ServerIcon className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-medium">RPC Endpoint</h3>
+              <ServerIcon className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+              <h3 className="text-base sm:text-lg font-medium">RPC Endpoint</h3>
             </div>
-            <p className="mt-1 text-sm text-muted-foreground">
+            <p className="mt-1 text-xs sm:text-sm text-muted-foreground">
               Solana network endpoint for blockchain interaction
             </p>
           </div>
-          <div className="p-6">
+          <div className="p-4 sm:p-6">
             <div className="space-y-4">
               <div className="flex flex-col gap-4 rounded-lg border bg-muted/20 p-4">
                 <div className="flex items-center gap-3">
@@ -339,12 +339,12 @@ export default function NetworkConnectionStep({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
-        className="mt-8 flex justify-between"
+        className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-0 sm:justify-between"
       >
         <Button
           variant="outline"
           onClick={onBack}
-          className="min-w-[120px]"
+          className="w-full sm:min-w-[120px] order-2 sm:order-1"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Previous
@@ -435,7 +435,7 @@ export default function NetworkConnectionStep({
             }
           }}
           disabled={rpcHealth !== "healthy" || isInitializing}
-          className="min-w-[120px]"
+          className="w-full sm:min-w-[120px] order-1 sm:order-2"
         >
           {isInitializing ? (
             <>

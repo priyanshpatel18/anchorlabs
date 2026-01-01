@@ -90,7 +90,7 @@ function HomePageContent() {
   // CASE 0: Program is currently reinitializing → show loader
   if (isReinitializing) {
     return (
-      <div className="flex flex-1 flex-col items-center justify-center gap-8 p-6 bg-gradient-to-b from-background via-background to-muted/20">
+      <div className="flex flex-1 flex-col items-center justify-center gap-6 sm:gap-8 p-4 sm:p-6 bg-gradient-to-b from-background via-background to-muted/20">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -106,21 +106,21 @@ function HomePageContent() {
               rotate: { duration: 2, repeat: Infinity, ease: "linear" },
               scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
             }}
-            className="flex items-center justify-center w-24 h-24 rounded-2xl bg-primary/10 border-2 border-primary/20"
+            className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-2xl bg-primary/10 border-2 border-primary/20"
           >
-            <Code2 className="h-12 w-12 text-primary" />
+            <Code2 className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-primary" />
           </motion.div>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="text-center space-y-3"
+          className="text-center space-y-2 sm:space-y-3 px-4"
         >
-          <h2 className={`${syne} text-2xl font-bold bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent`}>
+          <h2 className={`${syne} text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent`}>
             Initializing Program
           </h2>
-          <p className="text-base text-muted-foreground">
+          <p className="text-sm sm:text-base text-muted-foreground">
             This will only take a moment
           </p>
         </motion.div>
@@ -152,7 +152,7 @@ function HomePageContent() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="flex flex-1 flex-col items-center justify-center gap-8 p-6 bg-gradient-to-b from-background via-background to-muted/20"
+        className="flex flex-1 flex-col items-center justify-center gap-6 sm:gap-8 p-4 sm:p-6 bg-gradient-to-b from-background via-background to-muted/20"
       >
         <motion.div
           animate={{ 
@@ -163,20 +163,20 @@ function HomePageContent() {
             rotate: { duration: 2, repeat: Infinity, ease: "linear" },
             scale: { duration: 2, repeat: Infinity, ease: "easeInOut" }
           }}
-          className="flex items-center justify-center w-24 h-24 rounded-2xl bg-primary/10 border-2 border-primary/20"
+          className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-2xl bg-primary/10 border-2 border-primary/20"
         >
-          <Code2 className="h-12 w-12 text-primary" />
+          <Code2 className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-primary" />
         </motion.div>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
-          className="text-center space-y-2"
+          className="text-center space-y-2 px-4"
         >
-          <h2 className={`${syne} text-2xl font-bold bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent`}>
+          <h2 className={`${syne} text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent`}>
             Initializing Program
           </h2>
-          <p className="text-base text-muted-foreground">Please wait...</p>
+          <p className="text-sm sm:text-base text-muted-foreground">Please wait...</p>
         </motion.div>
       </motion.div>
     );
@@ -185,7 +185,7 @@ function HomePageContent() {
   // CASE 3: Program fully initialized and ready
   return (
     <>
-      <div className="w-full h-screen flex flex-1 items-center justify-center p-6 bg-gradient-to-b from-background via-background to-muted/20">
+      <div className="w-full h-screen flex flex-1 items-center justify-center p-4 sm:p-6 bg-gradient-to-b from-background via-background to-muted/20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -213,10 +213,10 @@ function HomePageContent() {
                 transition={{ delay: 0.3 }}
                 className="space-y-3"
               >
-                <CardTitle className={`${syne} text-4xl font-bold bg-gradient-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent`}>
+                <CardTitle className={`${syne} text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent`}>
                   Program Ready!
                 </CardTitle>
-                <CardDescription className="text-lg">
+                <CardDescription className="text-base sm:text-lg">
                   Your Anchor program is initialized and ready to test
                 </CardDescription>
               </motion.div>

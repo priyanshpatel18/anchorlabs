@@ -27,12 +27,12 @@ export default function WelcomeAnimation() {
               repeat: Infinity,
               repeatDelay: 1
             }}
-            className="flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-primary/10 border-2 border-primary/20"
+            className="flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-2xl bg-primary/10 border-2 border-primary/20"
           >
-            <Code2 className="h-10 w-10 md:h-12 md:w-12 text-primary" />
+            <Code2 className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 text-primary" />
           </motion.div>
           <h1
-            className={`${syne} text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent`}
+            className={`${syne} text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold bg-gradient-to-r from-foreground via-foreground to-primary bg-clip-text text-transparent`}
           >
             AnchorLabs
           </h1>

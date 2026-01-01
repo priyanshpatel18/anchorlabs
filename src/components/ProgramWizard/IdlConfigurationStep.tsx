@@ -152,12 +152,12 @@ export default function IdlConfigurationStep({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.1 }}
-        className="mb-6"
+        className="mb-4 sm:mb-6"
       >
-        <h2 className="text-2xl font-semibold tracking-tight">
+        <h2 className="text-xl sm:text-2xl font-semibold tracking-tight">
           Program IDL Configuration
         </h2>
-        <p className="text-muted-foreground">
+        <p className="text-sm sm:text-base text-muted-foreground">
           Provide your Anchor program Interface Definition Language file
         </p>
       </motion.div>
@@ -166,41 +166,44 @@ export default function IdlConfigurationStep({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="flex mb-4"
+        className="flex mb-3 sm:mb-4 overflow-x-auto"
       >
-        <div className="inline-flex h-10 items-center justify-center gap-1 rounded-md bg-muted p-1">
+        <div className="inline-flex h-9 sm:h-10 items-center justify-center gap-0.5 sm:gap-1 rounded-md bg-muted p-0.5 sm:p-1 min-w-full sm:min-w-0">
           <button
             onClick={() => setInputMethod("get-idl-from-address")}
-            className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${
+            className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 flex-1 sm:flex-none ${
               inputMethod === "get-idl-from-address"
                 ? "bg-background text-foreground shadow-sm"
                 : "text-muted-foreground hover:bg-muted/80"
             }`}
           >
-            <Code2 className="mr-2 h-4 w-4" />
-            Get IDL from Address
+            <Code2 className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="hidden sm:inline">Get IDL from Address</span>
+            <span className="sm:hidden">Address</span>
           </button>
           <button
             onClick={() => setInputMethod("editor")}
-            className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${
+            className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 flex-1 sm:flex-none ${
               inputMethod === "editor"
                 ? "bg-background text-foreground shadow-sm"
                 : "text-muted-foreground hover:bg-muted/80"
             }`}
           >
-            <Code2 className="mr-2 h-4 w-4" />
-            JSON Editor
+            <Code2 className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="hidden sm:inline">JSON Editor</span>
+            <span className="sm:hidden">Editor</span>
           </button>
           <button
             onClick={() => setInputMethod("upload")}
-            className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${
+            className={`inline-flex items-center justify-center whitespace-nowrap rounded-sm px-2 sm:px-3 py-1 sm:py-1.5 text-xs sm:text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 flex-1 sm:flex-none ${
               inputMethod === "upload"
                 ? "bg-background text-foreground shadow-sm"
                 : "text-muted-foreground hover:bg-muted/80"
             }`}
           >
-            <Upload className="mr-2 h-4 w-4" />
-            Upload File
+            <Upload className="mr-1 sm:mr-2 h-3 w-3 sm:h-4 sm:w-4" />
+            <span className="hidden sm:inline">Upload File</span>
+            <span className="sm:hidden">Upload</span>
           </button>
         </div>
       </motion.div>
@@ -221,9 +224,9 @@ export default function IdlConfigurationStep({
               transition={{ duration: 0.3 }}
               className="flex flex-col flex-1 rounded-lg border bg-card/50 shadow-sm"
             >
-              <div className="border-b bg-muted/30 px-6 py-4">
-                <h3 className="text-lg font-medium">Edit IDL JSON</h3>
-                <p className="text-sm text-muted-foreground">
+              <div className="border-b bg-muted/30 px-4 sm:px-6 py-3 sm:py-4">
+                <h3 className="text-base sm:text-lg font-medium">Edit IDL JSON</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Paste or modify your Anchor program IDL directly below
                 </p>
               </div>
@@ -258,17 +261,17 @@ export default function IdlConfigurationStep({
               transition={{ duration: 0.3 }}
               className="flex flex-1 flex-col overflow-hidden rounded-lg border bg-card/50 shadow-sm h-full"
             >
-              <div className="border-b bg-muted/30 px-6 py-4">
-                <h3 className="text-lg font-medium">Upload IDL File</h3>
-                <p className="text-sm text-muted-foreground">
+              <div className="border-b bg-muted/30 px-4 sm:px-6 py-3 sm:py-4">
+                <h3 className="text-base sm:text-lg font-medium">Upload IDL File</h3>
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Upload your Anchor program IDL JSON file to begin
                 </p>
               </div>
-              <div className="p-6 flex-1">
+              <div className="p-4 sm:p-6 flex-1">
                 <motion.div
                   animate={isDragActive ? { scale: 1.02 } : { scale: 1 }}
                   transition={{ duration: 0.2 }}
-                  className={`flex h-full flex-col items-center justify-center rounded-lg border border-dashed p-12 transition-colors cursor-pointer ${
+                  className={`flex h-full flex-col items-center justify-center rounded-lg border border-dashed p-6 sm:p-8 md:p-12 transition-colors cursor-pointer ${
                     isDragActive
                       ? "border-primary/50 bg-primary/20"
                       : "border-primary/20 bg-primary/5 hover:border-primary/30 hover:bg-primary/10"
@@ -293,14 +296,14 @@ export default function IdlConfigurationStep({
                       scale: isDragActive ? 1.1 : 1,
                     }}
                     transition={{ duration: 0.2 }}
-                    className="mb-4 rounded-full bg-primary/10 p-3"
+                    className="mb-3 sm:mb-4 rounded-full bg-primary/10 p-2 sm:p-3"
                   >
-                    <FileJson className="h-8 w-8 text-primary" />
+                    <FileJson className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
                   </motion.div>
-                  <div className="mb-2 text-xl font-medium">
+                  <div className="mb-2 text-base sm:text-lg md:text-xl font-medium text-center px-2">
                     Drop your IDL file here or click to browse
                   </div>
-                  <div className="mb-6 text-sm text-muted-foreground">
+                  <div className="mb-4 sm:mb-6 text-xs sm:text-sm text-muted-foreground text-center px-2">
                     Supports .json files up to {MAX_FILE_SIZE_MB}MB
                   </div>
                   <Button
@@ -321,9 +324,9 @@ export default function IdlConfigurationStep({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
-        className="mt-6 flex justify-end"
+        className="mt-4 sm:mt-6 flex justify-end"
       >
-        <Button onClick={onNext} disabled={!isValid} className="gap-2">
+        <Button onClick={onNext} disabled={!isValid} className="gap-2 w-full sm:w-auto">
           Continue
           <ArrowRight className="h-4 w-4" />
         </Button>

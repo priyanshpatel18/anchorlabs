@@ -77,12 +77,12 @@ export default function ProgramInitializationWizard({
   };
 
   return (
-    <div className="mx-auto flex h-screen w-full max-w-5xl flex-col p-6">
+    <div className="mx-auto flex h-screen w-full max-w-5xl flex-col p-4 sm:p-6">
       {/* Header with Branding */}
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-6 flex items-center justify-between"
+        className="mb-4 sm:mb-6 flex items-center justify-between gap-2 sm:gap-4"
       >
         <div className="flex items-center gap-3">
           <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-primary/10 border border-primary/20">
@@ -97,15 +97,16 @@ export default function ProgramInitializationWizard({
           variant="ghost"
           size="sm"
           onClick={handleBackToLanding}
-          className="gap-2"
+          className="gap-1 sm:gap-2 text-xs sm:text-sm"
         >
-          <X className="h-4 w-4" />
-          Back to Home
+          <X className="h-3 w-3 sm:h-4 sm:w-4" />
+          <span className="hidden xs:inline">Back to Home</span>
+          <span className="xs:hidden">Back</span>
         </Button>
       </motion.div>
       
-      <div className="mb-4">
-        <Stepper value={activeStep} className="items-start gap-4">
+      <div className="mb-3 sm:mb-4">
+        <Stepper value={activeStep} className="items-start gap-2 sm:gap-4">
           {WIZARD_STEPS.map(({ id, title, icon }) => {
             const isActive = activeStep === id;
             const isCompleted = activeStep > id;
@@ -125,9 +126,9 @@ export default function ProgramInitializationWizard({
                   >
                     <span className="sr-only">{id}</span>
                   </StepperIndicator>
-                  <div className="space-y-0.5 flex items-center gap-2 justify-center mt-2">
+                  <div className="space-y-0.5 flex items-center gap-1.5 sm:gap-2 justify-center mt-2 flex-col sm:flex-row">
                     <span
-                      className={`flex h-9 w-9 items-center justify-center rounded-full transition-all ${isActive
+                      className={`flex h-7 w-7 sm:h-9 sm:w-9 items-center justify-center rounded-full transition-all ${isActive
                         ? "bg-primary text-primary-foreground ring-2 ring-primary/20"
                         : isCompleted
                           ? "bg-primary text-primary-foreground"
@@ -137,7 +138,7 @@ export default function ProgramInitializationWizard({
                       {icon}
                     </span>
                     <StepperTitle
-                      className={`transition-colors ${isActive
+                      className={`transition-colors text-xs sm:text-sm md:text-base ${isActive
                         ? "text-primary font-medium"
                         : isCompleted
                           ? "text-foreground"
@@ -154,7 +155,7 @@ export default function ProgramInitializationWizard({
         </Stepper>
       </div>
 
-      <div className="flex-1 flex overflow-hidden rounded-xl border bg-card p-6 shadow-sm">
+      <div className="flex-1 flex overflow-hidden rounded-lg sm:rounded-xl border bg-card p-4 sm:p-6 shadow-sm">
         {activeStep === 1 && (
           <IdlConfigurationStep onNext={() => navigateToStep(2)} />
         )}
